@@ -19,13 +19,41 @@ export default function CampaignView() {
                 </div>
             </div>
 
-            {/* Center Content Placeholder */}
-            <div className="w-full h-full flex items-center justify-center pt-12">
-                <div className="text-center">
-                    <div className="w-16 h-16 border-2 border-tactical-cyan/30 rounded-full flex items-center justify-center mx-auto mb-4 animate-pulse">
-                        <div className="w-10 h-10 border border-tactical-cyan rounded-full"></div>
+            {/* Main Content Area: Map + Phase Selection Sidebar */}
+            <div className="w-full h-full pt-12 flex gap-4 z-10">
+
+                {/* Left Side: Map Placeholder */}
+                <div className="flex-1 flex flex-col items-center justify-center p-8 border-r border-slate-900/50">
+                    <div className="w-24 h-24 border-2 border-tactical-cyan/20 rounded-full flex items-center justify-center mb-4 animate-pulse">
+                        <div className="w-16 h-16 border border-tactical-cyan/40 rounded-full"></div>
                     </div>
-                    <p className="text-slate-500 font-mono text-xs uppercase tracking-widest">Aguardando Seleção de Setor...</p>
+                    <p className="text-slate-600 font-mono text-[10px] uppercase tracking-widest text-center">
+                        Sensores de Área: Ativados<br />
+                        <span className="text-slate-700">Aguardando coordenadas do setor...</span>
+                    </p>
+                </div>
+
+                {/* Right Side: Phase Selection Sidebar */}
+                <div className="w-64 h-full bg-slate-900/40 backdrop-blur-sm border-l border-slate-800 p-4 flex flex-col gap-3">
+                    <div className="mb-2">
+                        <span className="text-[9px] text-slate-500 font-mono uppercase tracking-[0.2em] border-b border-slate-800 block pb-1 mb-2">Seleção de Fase</span>
+                    </div>
+
+                    {[1, 2, 3, 4].map(phase => (
+                        <button
+                            key={phase}
+                            className="w-full panel-tactical !py-3 !px-4 flex flex-col items-start hover:border-tactical-neon transition-all bg-slate-900/60 group"
+                        >
+                            <span className="text-[8px] text-tactical-neon font-mono uppercase tracking-widest opacity-60 group-hover:opacity-100">Fase 0{phase}</span>
+                            <span className="text-xs font-bold text-white uppercase tracking-tight">
+                                {phase === 1 ? 'Introdução Tática' : phase === 2 ? 'Cinemática Aplicada' : phase === 3 ? 'Dinâmica de Forças' : 'Energia e Gravitação'}
+                            </span>
+                        </button>
+                    ))}
+
+                    <div className="mt-auto pt-4 border-t border-slate-800">
+                        <p className="text-[8px] text-slate-500 font-mono text-center">ID_REQ: PHASE_AUTH_REQUIRED</p>
+                    </div>
                 </div>
             </div>
 

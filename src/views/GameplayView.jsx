@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useGameStore } from '../store/gameStore';
 import { useNavigate } from 'react-router-dom';
+import { Calculator } from 'lucide-react';
+import TacticalCalculator from '../components/TacticalCalculator';
 
 export default function GameplayView() {
     const { challengeData, currentPhase, addDiamonds, avatar } = useGameStore();
@@ -9,6 +11,7 @@ export default function GameplayView() {
     const [timeLeft, setTimeLeft] = useState(60);
     const [hintLevel, setHintLevel] = useState(0); // 0=none, 1=text, 2=formula
     const [diamondsSpent, setDiamondsSpent] = useState(0);
+    const [showCalc, setShowCalc] = useState(false);
 
     // Timer effect
     useEffect(() => {
@@ -91,6 +94,15 @@ export default function GameplayView() {
                             </span>
                         </div>
                     </button>
+
+                    {/* Calculator Button (Added) */}
+                    <button
+                        onClick={() => setShowCalc(true)}
+                        className="panel-tactical !p-1.5 !py-1.5 flex items-center gap-2 hover:border-tactical-neon transition-colors"
+                    >
+                        <Calculator size={14} className="text-tactical-neon" />
+                        <span className="text-[10px] text-slate-300 font-mono hidden sm:block uppercase tracking-tighter">Calc</span>
+                    </button>
                 </div>
 
                 <div className="flex gap-2">
@@ -171,6 +183,8 @@ export default function GameplayView() {
                 ))}
             </div>
 
+            {/* Calculator Overlay */}
+            {showCalc && <TacticalCalculator onClose={() => setShowCalc(false)} />}
         </div>
     );
 }
