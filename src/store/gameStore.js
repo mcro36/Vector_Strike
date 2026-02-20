@@ -125,9 +125,12 @@ export const useGameStore = create((set, get) => ({
         await get().syncWithCloud();
     },
 
-    resetGame: () => set({
-        playerName: "",
-        diamonds: 0,
-        currentChallengeId: 1
-    })
+    resetGame: () => {
+        localStorage.removeItem('vector_strike_session_user');
+        set({
+            playerName: "",
+            diamonds: 0,
+            currentChallengeId: 1
+        });
+    }
 }));
