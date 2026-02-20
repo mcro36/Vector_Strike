@@ -16,7 +16,7 @@ export default function LoginView() {
             if (result?.success) {
                 // Save session for restoration after refresh
                 localStorage.setItem('vector_strike_session_user', name.trim());
-                navigate('/campaign'); // Redirecionando direto para campanha agora
+                navigate('/hub'); // Redirecionando para o Hub Principal
             } else {
                 alert("Erro ao conectar com a Central de Comando (Supabase). Verifique sua internet.");
             }

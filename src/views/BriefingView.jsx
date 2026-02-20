@@ -40,7 +40,7 @@ export default function BriefingView() {
             </div>
 
             {/* Main Content Area */}
-            <div className="w-full h-full pt-10 px-4 flex justify-end items-center z-10 relative">
+            <div className="w-full h-full pt-10 px-4 flex justify-start items-center z-10 relative">
 
                 {/* General Mentor + Transmission Link (Grouped) */}
                 <div className="absolute top-12 left-6 flex items-start gap-[20px]">
@@ -65,47 +65,6 @@ export default function BriefingView() {
                         <p className="text-slate-300 text-[10px] leading-tight italic font-medium">
                             "{challengeData?.storyContext}"
                         </p>
-                    </div>
-                </div>
-
-                {/* Right Column: Mission Details */}
-                <div className="w-full max-w-sm flex flex-col items-end">
-                    <div className="panel-tactical w-full text-right relative backdrop-blur-md p-4">
-                        <div className="absolute -top-1 -left-1 w-2 h-2 border-t-[1px] border-l-[1px] border-tactical-cyan"></div>
-
-                        <div className="mb-0.5 text-slate-400 font-mono text-[9px] tracking-widest uppercase">Operação de Campo</div>
-                        <h1 className="text-2xl text-white font-black uppercase mb-0.5">
-                            Fase 0{currentPhase}
-                        </h1>
-                        <h2 className="text-[11px] text-tactical-neon font-bold mb-2 truncate uppercase tracking-widest">
-                            {challengeData?.title}
-                        </h2>
-
-                        <div className="flex flex-col items-end gap-1 mb-3 font-mono text-[10px] group">
-                            <div className="flex w-full justify-between items-center text-slate-400 border-b border-slate-800 py-0.5">
-                                <span>Progresso:</span>
-                                <strong className="text-tactical-cyan">{challengeData?.id}/31</strong>
-                            </div>
-                            <div className="flex w-full justify-between items-center text-slate-400 border-b border-slate-800 py-0.5">
-                                <span>Tipo:</span>
-                                <strong className="text-tactical-alert text-[9px]">Física Tática</strong>
-                            </div>
-                            <div className="flex w-full justify-between items-center text-slate-400 border-b border-slate-800 py-0.5">
-                                <span>Premiação:</span>
-                                <strong className="text-white flex items-center gap-1">200<span className="text-tactical-neon text-[7px]">♦</span></strong>
-                            </div>
-                        </div>
-
-                        <button
-                            className="btn-tactical w-full py-2 text-xs relative group overflow-hidden shadow-lg shadow-tactical-cyan/10"
-                            onClick={() => navigate('/mission')}
-                        >
-                            <div className="absolute inset-0 w-full h-full bg-tactical-neon/20 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-out"></div>
-                            <span className="relative z-10 flex items-center justify-center gap-1.5">
-                                INICIAR DEPLOY
-                                <svg className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-                            </span>
-                        </button>
                     </div>
                 </div>
             </div>

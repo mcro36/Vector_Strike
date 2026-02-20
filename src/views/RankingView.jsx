@@ -40,7 +40,7 @@ export default function RankingView() {
             {/* Header Area */}
             <div className="flex justify-between items-center mb-4 z-10 relative">
                 <button
-                    onClick={() => navigate('/campaign')}
+                    onClick={() => navigate('/hub')}
                     className="panel-tactical !p-2 px-4 flex items-center gap-2 hover:border-tactical-alert transition-all text-slate-400 hover:text-white"
                 >
                     <ArrowLeft size={16} />
