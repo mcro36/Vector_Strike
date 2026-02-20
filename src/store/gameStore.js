@@ -27,6 +27,7 @@ export const useGameStore = create((set, get) => ({
     playerName: "",
     avatar: "avatar_tim",
     diamonds: 0,
+    totalXp: 0,
     currentChallengeId: 1,
     isLoading: false,
 
@@ -55,6 +56,7 @@ export const useGameStore = create((set, get) => ({
                     playerName: data.player_name,
                     avatar: data.avatar,
                     diamonds: data.diamonds,
+                    totalXp: data.total_xp || 0,
                     currentChallengeId: data.challenge_id,
                     isLoading: false
                 });
@@ -67,6 +69,7 @@ export const useGameStore = create((set, get) => ({
                         player_name: trimmedName,
                         avatar: selectedAvatar,
                         diamonds: 0,
+                        total_xp: 0,
                         challenge_id: 1
                     }])
                     .select()
@@ -77,6 +80,7 @@ export const useGameStore = create((set, get) => ({
                         playerName: newProfile.player_name,
                         avatar: newProfile.avatar,
                         diamonds: newProfile.diamonds,
+                        totalXp: newProfile.total_xp,
                         currentChallengeId: newProfile.challenge_id,
                         isLoading: false
                     });
@@ -91,7 +95,7 @@ export const useGameStore = create((set, get) => ({
     },
 
     syncWithCloud: async () => {
-        const { playerName, avatar, diamonds, currentChallengeId } = get();
+        const { playerName, avatar, diamonds, totalXp, currentChallengeId } = get();
         if (!playerName) return;
 
         try {
@@ -100,6 +104,7 @@ export const useGameStore = create((set, get) => ({
                 .update({
                     avatar,
                     diamonds,
+                    total_xp: totalXp,
                     challenge_id: currentChallengeId,
                     updated_at: new Date().toISOString()
                 })
@@ -110,7 +115,11 @@ export const useGameStore = create((set, get) => ({
     },
 
     addDiamonds: async (amount) => {
-        set((state) => ({ diamonds: state.diamonds + amount }));
+        const xpEarned = amount * 2;
+        set((state) => ({
+            diamonds: state.diamonds + amount,
+            totalXp: state.totalXp + xpEarned
+        }));
         await get().syncWithCloud();
     },
 
@@ -130,6 +139,7 @@ export const useGameStore = create((set, get) => ({
         set({
             playerName: "",
             diamonds: 0,
+            totalXp: 0,
             currentChallengeId: 1
         });
     }

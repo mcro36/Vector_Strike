@@ -111,12 +111,18 @@ export default function BriefingView() {
             </div>
 
             {/* Bottom Utility Bar */}
-            <div className="absolute bottom-4 left-0 w-full flex justify-center gap-4 z-20">
+            <div className="absolute bottom-4 left-0 w-full flex justify-center gap-4 z-20 px-4">
                 <button
                     onClick={() => navigate('/campaign')}
                     className="btn-tactical py-1.5 px-6 text-[10px] tracking-widest shadow-lg shadow-tactical-alert/5 border-tactical-alert/30"
                 >
                     CAMPANHA
+                </button>
+                <button
+                    onClick={() => navigate('/ranking')}
+                    className="btn-tactical py-1.5 px-6 text-[10px] tracking-widest bg-slate-900/50 border-slate-700 hover:border-tactical-cyan transition group"
+                >
+                    <span className="opacity-70 group-hover:opacity-100 uppercase font-bold text-tactical-cyan">Ranking</span>
                 </button>
                 <button
                     onClick={() => navigate('/shop')}

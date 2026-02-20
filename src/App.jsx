@@ -7,6 +7,7 @@ import GameplayView from './views/GameplayView';
 import FeedbackView from './views/FeedbackView';
 import CampaignView from './views/CampaignView';
 import ShopView from './views/ShopView';
+import RankingView from './views/RankingView';
 
 function App() {
   const { playerName, login, isLoading } = useGameStore();
@@ -45,6 +46,7 @@ function App() {
           <Route path="/result" element={playerName ? <FeedbackView /> : <Navigate to="/" />} />
           <Route path="/campaign" element={playerName ? <CampaignView /> : <Navigate to="/" />} />
           <Route path="/shop" element={playerName ? <ShopView /> : <Navigate to="/" />} />
+          <Route path="/ranking" element={playerName ? <RankingView /> : <Navigate to="/" />} />
         </Routes>
       </div>
     </HashRouter>
