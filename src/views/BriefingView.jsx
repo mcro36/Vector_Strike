@@ -1,10 +1,34 @@
 import { useGameStore } from '../store/gameStore';
 import { useNavigate } from 'react-router-dom';
 import { LogOut } from 'lucide-react';
+import challengesData from '../data/challenges';
+
+const getPhase = (challengeId) => {
+    if (challengeId === 1) return 1;
+    if (challengeId <= 11) return 2;
+    if (challengeId <= 21) return 3;
+    return 4;
+};
 
 export default function BriefingView() {
-    const { playerName, currentRank, currentPhase, diamonds, challengeData, resetGame } = useGameStore();
+    const { playerName, currentChallengeId, diamonds, resetGame } = useGameStore();
     const navigate = useNavigate();
+
+    const challengeData = challengesData.find(c => c.id === currentChallengeId);
+    const currentPhase = getPhase(currentChallengeId);
+
+    // Dynamic Rank based on challengeId
+    const currentRank = (() => {
+        if (currentChallengeId === 1) return "Cadete";
+        if (currentChallengeId <= 11) return "Aspirante";
+        if (currentChallengeId <= 16) return "2º Tenente";
+        if (currentChallengeId <= 19) return "1º Tenente";
+        if (currentChallengeId <= 21) return "Capitão";
+        if (currentChallengeId <= 25) return "Major";
+        if (currentChallengeId <= 29) return "Ten. Coronel";
+        if (currentChallengeId <= 30) return "Coronel";
+        return "General";
+    })();
 
     const handleLogout = () => {
         resetGame();

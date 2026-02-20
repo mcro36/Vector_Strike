@@ -1,10 +1,21 @@
 import { useNavigate } from 'react-router-dom';
 import { useGameStore } from '../store/gameStore';
 import { ArrowLeft, BarChart } from 'lucide-react';
+import challengesData from '../data/challenges';
+
+const getPhase = (challengeId) => {
+    if (challengeId === 1) return 1;
+    if (challengeId <= 11) return 2;
+    if (challengeId <= 21) return 3;
+    return 4;
+};
 
 export default function CampaignView() {
     const navigate = useNavigate();
-    const { currentPhase, challengeData } = useGameStore();
+    const { currentChallengeId } = useGameStore();
+
+    const challengeData = challengesData.find(c => c.id === currentChallengeId);
+    const currentPhase = getPhase(currentChallengeId);
 
     return (
         <div className="flex w-full h-full bg-slate-950 p-6 relative overflow-hidden font-sans">

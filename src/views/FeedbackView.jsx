@@ -1,10 +1,21 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useGameStore } from '../store/gameStore';
+import challengesData from '../data/challenges';
+
+const getPhase = (challengeId) => {
+    if (challengeId === 1) return 1;
+    if (challengeId <= 11) return 2;
+    if (challengeId <= 21) return 3;
+    return 4;
+};
 
 export default function FeedbackView() {
     const location = useLocation();
     const navigate = useNavigate();
-    const { advanceChallenge, totalChallenges, currentChallengeId, currentPhase } = useGameStore();
+    const { advanceChallenge, currentChallengeId } = useGameStore();
+
+    const totalChallenges = challengesData.length;
+    const currentPhase = getPhase(currentChallengeId);
 
     const { success, earned, timeSpent, hints, completedId, completedPhase } = location.state || {
         success: false, earned: 0, timeSpent: 0, hints: 0, completedId: currentChallengeId, completedPhase: currentPhase

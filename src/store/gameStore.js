@@ -31,12 +31,6 @@ export const useGameStore = create((set, get) => ({
     currentChallengeId: 1,
     isLoading: false,
 
-    // Computed (derived) state helpers
-    get currentPhase() { return getPhase(get().currentChallengeId); },
-    get currentRank() { return getRank(get().currentChallengeId); },
-    get totalChallenges() { return challengesData.length; },
-    get challengeData() { return challengesData.find(c => c.id === get().currentChallengeId); },
-
     // Actions
     login: async (name, selectedAvatar) => {
         set({ isLoading: true });

@@ -3,10 +3,21 @@ import { useGameStore } from '../store/gameStore';
 import { useNavigate } from 'react-router-dom';
 import { Calculator } from 'lucide-react';
 import TacticalCalculator from '../components/TacticalCalculator';
+import challengesData from '../data/challenges';
+
+const getPhase = (challengeId) => {
+    if (challengeId === 1) return 1;
+    if (challengeId <= 11) return 2;
+    if (challengeId <= 21) return 3;
+    return 4;
+};
 
 export default function GameplayView() {
-    const { challengeData, currentPhase, addDiamonds, avatar } = useGameStore();
+    const { currentChallengeId, addDiamonds, avatar } = useGameStore();
     const navigate = useNavigate();
+
+    const challengeData = challengesData.find(c => c.id === currentChallengeId);
+    const currentPhase = getPhase(currentChallengeId);
 
     const [timeElapsed, setTimeElapsed] = useState(0);
     const [hintLevel, setHintLevel] = useState(0); // 0=none, 1=text, 2=formula
