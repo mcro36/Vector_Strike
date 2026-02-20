@@ -66,6 +66,15 @@ export default function GameplayView() {
             {/* Top HUD (Reduced height and padding) */}
             <div className="w-full flex justify-between items-center px-4 py-2 z-20">
                 <div className="flex gap-2 items-center">
+                    {/* Return Button (Added) */}
+                    <button
+                        onClick={() => navigate('/hub')}
+                        className="panel-tactical !p-1.5 !py-1.5 hover:border-tactical-alert transition-colors group"
+                        title="Abortar Missão"
+                    >
+                        <span className="text-[10px] text-slate-500 group-hover:text-tactical-alert font-mono uppercase tracking-tighter">[ABORTAR]</span>
+                    </button>
+
                     {/* Intel Button (Shrunk) */}
                     <button
                         onClick={handleIntelClick}

@@ -2,12 +2,11 @@ import { useGameStore } from '../store/gameStore';
 import { useNavigate } from 'react-router-dom';
 
 export default function BriefingView() {
-    const { playerName, avatar, currentRank, currentPhase, diamonds, challengeData, resetGame } = useGameStore();
+    const { playerName, currentRank, currentPhase, diamonds, challengeData, resetGame } = useGameStore();
     const navigate = useNavigate();
 
     const handleLogout = () => {
         resetGame();
-        // App.jsx Router will automatically redirect to "/" because playerName is now empty
     };
 
     return (
@@ -15,7 +14,7 @@ export default function BriefingView() {
             {/* Background Hologram grid */}
             <div className="absolute inset-0 opacity-20 bg-[linear-gradient(rgba(6,182,212,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(6,182,212,0.1)_1px,transparent_1px)] bg-[size:40px_40px]"></div>
 
-            {/* Top Status Bar (Reduced Height & Text) */}
+            {/* Top Status Bar */}
             <div className="absolute top-0 left-0 w-full h-10 bg-gradient-to-r from-tactical-dark via-slate-800 to-tactical-dark border-b border-tactical-cyan flex items-center px-4 justify-between z-20 shadow-lg">
                 <div className="flex gap-2 items-center">
                     <div className="px-2 py-0.5 bg-tactical-light border border-slate-600 rounded text-[10px] text-tactical-cyan uppercase tracking-widest flex items-center gap-1.5">
@@ -40,39 +39,38 @@ export default function BriefingView() {
                 </div>
             </div>
 
-            {/* Main Content Area: Now using relative positioning to place the General at the top-left */}
+            {/* Main Content Area */}
             <div className="w-full h-full pt-10 px-4 flex justify-end items-center z-10 relative">
 
-                {/* Floating General Mentor Avatar (Top-Left) */}
-                <div className="absolute top-12 left-6 w-32 h-[11rem] z-0">
-                    <div className="absolute inset-0 bg-tactical-alert/10 blur-xl rounded-full"></div>
-                    <div
-                        className="w-full h-full bg-slate-800 border-[1px] border-slate-700/50 rounded-md flex flex-col justify-end relative shadow-lg bg-cover bg-top"
-                        style={{ backgroundImage: "url('avatar_general.png')" }}
-                    >
-                        <div className="absolute top-1.5 left-1.5 font-mono text-[7px] opacity-70 uppercase text-white bg-black/50 px-1 py-0.5 rounded backdrop-blur-sm">Comando Central</div>
-                        <div className="h-1/4 w-full bg-gradient-to-t from-slate-950 via-slate-900/60 to-transparent absolute bottom-0"></div>
+                {/* General Mentor + Transmission Link (Grouped) */}
+                <div className="absolute top-12 left-6 flex items-start gap-[20px]">
+                    <div className="w-28 h-[10rem] flex-shrink-0 relative">
+                        <div className="absolute inset-0 bg-tactical-alert/10 blur-xl rounded-full"></div>
+                        <div
+                            className="w-full h-full bg-slate-800 border-[1px] border-slate-700/50 rounded-md flex flex-col justify-end relative shadow-lg bg-cover bg-top"
+                            style={{ backgroundImage: "url('avatar_general.png')" }}
+                        >
+                            <div className="absolute top-1.5 left-1.5 font-mono text-[7px] opacity-70 uppercase text-white bg-black/50 px-1 py-0.5 rounded backdrop-blur-sm">Comando Central</div>
+                            <div className="h-1/4 w-full bg-gradient-to-t from-slate-950 via-slate-900/60 to-transparent absolute bottom-0"></div>
+                        </div>
                     </div>
-                </div>
 
-                {/* Right Column: Transmission & Mission (Stacked) */}
-                <div className="w-full max-w-sm flex flex-col gap-3">
-
-                    {/* Dialog Box: Now at the top of the right column */}
-                    <div className="panel-tactical w-full p-3 relative shadow-md">
+                    {/* Dialog Box: 20px next to avatar */}
+                    <div className="panel-tactical w-60 p-3 mt-4 relative shadow-md self-center">
                         <div className="absolute top-0 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-tactical-alert to-transparent"></div>
                         <h3 className="text-tactical-alert text-[9px] uppercase tracking-widest mb-1 flex items-center gap-1.5">
                             <span className="w-1.5 h-1.5 bg-tactical-alert block animate-pulse"></span>
-                            Transmissão de Comando
+                            Link Ativo
                         </h3>
-                        <p className="text-slate-300 text-[11px] leading-tight italic font-medium">
+                        <p className="text-slate-300 text-[10px] leading-tight italic font-medium">
                             "{challengeData?.storyContext}"
                         </p>
                     </div>
+                </div>
 
-                    {/* Mission Details & Deploy: Below transmission */}
+                {/* Right Column: Mission Details */}
+                <div className="w-full max-w-sm flex flex-col items-end">
                     <div className="panel-tactical w-full text-right relative backdrop-blur-md p-4">
-                        {/* Tactical decoration corner */}
                         <div className="absolute -top-1 -left-1 w-2 h-2 border-t-[1px] border-l-[1px] border-tactical-cyan"></div>
 
                         <div className="mb-0.5 text-slate-400 font-mono text-[9px] tracking-widest uppercase">Operação de Campo</div>
@@ -109,8 +107,23 @@ export default function BriefingView() {
                             </span>
                         </button>
                     </div>
-
                 </div>
+            </div>
+
+            {/* Bottom Utility Bar */}
+            <div className="absolute bottom-4 left-0 w-full flex justify-center gap-4 z-20">
+                <button
+                    onClick={() => navigate('/campaign')}
+                    className="btn-tactical py-1.5 px-6 text-[10px] tracking-widest shadow-lg shadow-tactical-alert/5 border-tactical-alert/30"
+                >
+                    CAMPANHA
+                </button>
+                <button
+                    onClick={() => navigate('/shop')}
+                    className="btn-tactical py-1.5 px-6 text-[10px] tracking-widest bg-slate-900/50 border-slate-700 hover:border-tactical-cyan transition group"
+                >
+                    <span className="opacity-70 group-hover:opacity-100 uppercase">Loja</span>
+                </button>
             </div>
         </div>
     );
