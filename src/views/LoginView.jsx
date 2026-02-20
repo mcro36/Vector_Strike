@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useGameStore } from '../store/gameStore';
 import { useNavigate } from 'react-router-dom';
+import { ChevronRight } from 'lucide-react';
 
 export default function LoginView() {
     const login = useGameStore((state) => state.login);
@@ -24,9 +25,9 @@ export default function LoginView() {
 
             {/* Central Panel: Login Info & Avatars */}
             <div className="panel-tactical w-[90%] max-w-4xl flex flex-col items-center gap-6 relative z-10 p-8">
-                <div className="text-center w-full whitespace-nowrap">
-                    {/* REDUCED FONT SIZE BY ~20% (text-4xl/5xl to text-3xl/4xl) */}
-                    <h1 className="text-3xl md:text-4xl font-black text-white tracking-[0.2em] mb-1 truncate">
+                {/* 1 - TITLE FIX: Added py-2 padding and leading-normal to prevent cutoff of the 3D/shadow fonts */}
+                <div className="text-center w-full whitespace-nowrap py-2">
+                    <h1 className="text-3xl md:text-4xl font-black text-white tracking-[0.2em] mb-1 truncate leading-normal">
                         VECTOR <span className="text-tactical-cyan">STRIKE</span>
                     </h1>
                 </div>
@@ -70,26 +71,26 @@ export default function LoginView() {
                     </button>
                 </div>
 
-                <div className="flex flex-col gap-2 w-full max-w-[16rem] mt-4">
-                    {/* REDUCED INPUT BASE SIZE BY ~15% (p-4/text-xl -> p-3/text-lg), And width by 30% */}
+                {/* 3 & 4 - INPUT AND BUTTON HORIZONTAL: Using flex-row with smaller height (py-2 instead of p-3) */}
+                <div className="flex flex-row items-center gap-2 w-full max-w-[20rem] mt-4">
+                    {/* 2 - DECREASE HEIGHT 10%: Swapped p-3 for py-2 px-3 text-base */}
                     <input
                         type="text"
                         value={name}
                         onChange={(e) => setName(e.target.value)}
-                        placeholder="[SEU NOME AQUI]"
-                        className="bg-slate-900 border border-slate-700 focus:border-tactical-cyan p-3 text-center text-white outline-none font-mono text-lg transition-colors w-full uppercase placeholder-slate-600"
+                        placeholder="NOME"
+                        className="bg-slate-900 border border-slate-700 focus:border-tactical-cyan py-2 px-3 text-center text-white outline-none font-mono text-base transition-colors w-full uppercase placeholder-slate-600 flex-1"
                         autoComplete="off"
                     />
-                </div>
 
-                {/* RENOMEOU PARA ALISTAR-SE (Item 3) */}
-                <button
-                    className="btn-tactical text-xl w-full max-w-[16rem] disabled:opacity-50 disabled:cursor-not-allowed"
-                    onClick={handleStart}
-                    disabled={!name.trim()}
-                >
-                    ALISTAR-SE
-                </button>
+                    <button
+                        className="btn-tactical !p-0 w-12 h-11 flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed shrink-0"
+                        onClick={handleStart}
+                        disabled={!name.trim()}
+                    >
+                        <ChevronRight size={24} />
+                    </button>
+                </div>
             </div>
 
             {/* Decorative corner brackets (Page) */}
