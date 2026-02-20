@@ -6,20 +6,24 @@ export default function FeedbackView() {
     const navigate = useNavigate();
     const { advanceChallenge, totalChallenges, currentChallengeId, currentPhase } = useGameStore();
 
-    const { success, earned, timeSpent, hints } = location.state || { success: false, earned: 0, timeSpent: 0, hints: 0 };
+    const { success, earned, timeSpent, hints, completedId, completedPhase } = location.state || {
+        success: false, earned: 0, timeSpent: 0, hints: 0, completedId: currentChallengeId, completedPhase: currentPhase
+    };
 
     const handleNext = () => {
         if (success) {
-            if (currentChallengeId < totalChallenges) {
-                advanceChallenge();
-                navigate('/hub');
+            if (currentChallengeId <= totalChallenges) {
+                // If it's the last one, maybe go to hub
+                if (completedId === totalChallenges) {
+                    navigate('/hub');
+                } else {
+                    navigate('/mission'); // Already advanced in GameplayView
+                }
             } else {
-                // Game completed logic
-                alert('Treinamento Concluído! Patente Máxima Atingida.');
                 navigate('/hub');
             }
         } else {
-            // Retry
+            // Retry the same one (still the current ID)
             navigate('/mission');
         }
     };
@@ -42,7 +46,7 @@ export default function FeedbackView() {
                 </h1>
 
                 <p className="text-slate-500 font-mono mb-4 uppercase text-[10px]">
-                    Relatório Operacional - Fase 0{currentPhase} - Setor {currentChallengeId}
+                    Relatório Operacional - Fase 0{completedPhase} - Setor {completedId}
                 </p>
 
                 {/* Tactical Diagram (Shrunk) */}
@@ -73,15 +77,15 @@ export default function FeedbackView() {
                         className={`btn-tactical w-full py-3 text-base ${!success ? 'btn-tactical-alert' : ''}`}
                         onClick={handleNext}
                     >
-                        {success ? 'Avançar Progressão Tática' : 'Retentar Simulação Física'}
+                        {success ? (completedId === totalChallenges ? 'Finalizar Treinamento' : 'Próxima Missão') : 'Tentar Novamente'}
                     </button>
                 </div>
 
-                {success && (
-                    <button onClick={() => navigate('/hub')} className="mt-4 text-[10px] text-slate-500 font-mono uppercase hover:text-white transition tracking-tighter">
-                        Voltar ao Hub de Operações
+                <div className="flex gap-4 mt-4">
+                    <button onClick={() => navigate('/hub')} className="text-[10px] text-slate-500 font-mono uppercase hover:text-white transition tracking-tighter">
+                        Voltar ao Hub
                     </button>
-                )}
+                </div>
             </div>
 
         </div>

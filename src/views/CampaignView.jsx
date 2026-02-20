@@ -69,7 +69,7 @@ export default function CampaignView() {
                         >
                             <div className="absolute inset-0 w-full h-full bg-tactical-neon/20 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-out"></div>
                             <span className="relative z-10 flex items-center justify-center gap-1.5 uppercase font-bold tracking-widest">
-                                Iniciar Deploy
+                                Iniciar
                                 <svg className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                             </span>
                         </button>
