@@ -15,104 +15,104 @@ export default function BriefingView() {
             {/* Background Hologram grid */}
             <div className="absolute inset-0 opacity-20 bg-[linear-gradient(rgba(6,182,212,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(6,182,212,0.1)_1px,transparent_1px)] bg-[size:40px_40px]"></div>
 
-            {/* Top Status Bar */}
-            <div className="absolute top-0 left-0 w-full h-16 bg-gradient-to-r from-tactical-dark via-slate-800 to-tactical-dark border-b border-tactical-cyan flex items-center px-8 justify-between z-20 shadow-lg">
-                <div className="flex gap-4 items-center">
-                    <div className="px-3 py-1 bg-tactical-light border border-slate-600 rounded text-xs text-tactical-cyan uppercase tracking-widest flex items-center gap-2">
-                        <span className="w-2 h-2 rounded-full animate-pulse bg-green-500"></span> Operador: <strong className="text-white">{playerName}</strong>
+            {/* Top Status Bar (Reduced Height & Text) */}
+            <div className="absolute top-0 left-0 w-full h-10 bg-gradient-to-r from-tactical-dark via-slate-800 to-tactical-dark border-b border-tactical-cyan flex items-center px-4 justify-between z-20 shadow-lg">
+                <div className="flex gap-2 items-center">
+                    <div className="px-2 py-0.5 bg-tactical-light border border-slate-600 rounded text-[10px] text-tactical-cyan uppercase tracking-widest flex items-center gap-1.5">
+                        <span className="w-1.5 h-1.5 rounded-full animate-pulse bg-green-500"></span> Operador: <strong className="text-white">{playerName}</strong>
                     </div>
-                    <div className="px-3 py-1 border border-tactical-alert/50 text-tactical-alert bg-tactical-alert/10 uppercase text-xs tracking-wider rounded">
+                    <div className="px-2 py-0.5 border border-tactical-alert/50 text-tactical-alert bg-tactical-alert/10 uppercase text-[10px] tracking-wider rounded">
                         Patente Local: {currentRank}
                     </div>
                 </div>
 
-                <div className="flex flex-col items-end gap-1">
-                    <div className="font-mono text-tactical-neon flex items-center gap-2">
-                        <span className="text-[10px] uppercase text-slate-400">Total Diamonds:</span>
-                        <span className="text-xl font-bold tracking-widest">{diamonds}♦</span>
+                <div className="flex flex-col items-end gap-0.5">
+                    <div className="font-mono text-tactical-neon flex items-center gap-1.5">
+                        <span className="text-[8px] uppercase text-slate-400">Total Diamonds:</span>
+                        <span className="text-sm font-bold tracking-widest">{diamonds}♦</span>
                     </div>
                     <button
                         onClick={handleLogout}
-                        className="text-[10px] uppercase text-slate-500 hover:text-tactical-alert transition-colors tracking-wider cursor-pointer"
+                        className="text-[8px] uppercase text-slate-500 hover:text-tactical-alert transition-colors tracking-wider cursor-pointer leading-none"
                     >
                         [Trocar de Conta]
                     </button>
                 </div>
             </div>
 
-            {/* Main Content Area */}
-            <div className="w-full h-full pt-12 flex items-center justify-between z-10 gap-8">
+            {/* Main Content Area (Shrunk Margins) */}
+            <div className="w-full h-full pt-10 flex items-center justify-between z-10 gap-4">
 
                 {/* Left Side: General Mentor Avatar and Dialogue */}
-                <div className="w-[45%] h-full flex flex-col justify-end pb-8 relative">
+                <div className="w-[45%] h-full flex flex-col justify-end pb-4 relative">
 
-                    {/* General Image Box Placeholder */}
-                    <div className="relative w-80 h-[28rem] self-center -mb-8 z-0">
+                    {/* General Image Box Placeholder (Shrunk 50%) */}
+                    <div className="relative w-40 h-[14rem] self-center -mb-4 z-0">
                         {/* General BG glow */}
-                        <div className="absolute inset-0 bg-tactical-alert/20 blur-3xl rounded-full"></div>
+                        <div className="absolute inset-0 bg-tactical-alert/20 blur-xl rounded-full"></div>
                         {/* Image frame */}
                         <div
-                            className="w-full h-full bg-slate-800 border-2 border-slate-700/50 rounded-lg flex flex-col justify-end relative shadow-2xl bg-cover bg-top"
+                            className="w-full h-full bg-slate-800 border-[1px] border-slate-700/50 rounded-md flex flex-col justify-end relative shadow-xl bg-cover bg-top"
                             style={{ backgroundImage: "url('avatar_general.png')" }}
                         >
-                            <div className="absolute top-4 left-4 font-mono text-xs opacity-50 uppercase text-white bg-black/50 px-2 py-1 rounded backdrop-blur-sm">General Mentor</div>
+                            <div className="absolute top-2 left-2 font-mono text-[8px] opacity-70 uppercase text-white bg-black/50 px-1 py-0.5 rounded backdrop-blur-sm">General Mentor</div>
                             {/* Gradients to blend character feet */}
                             <div className="h-1/3 w-full bg-gradient-to-t from-slate-950 via-slate-900/80 to-transparent absolute bottom-0"></div>
                         </div>
                     </div>
 
-                    {/* Dialog Box */}
-                    <div className="panel-tactical w-full z-10 p-6 relative">
-                        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-tactical-alert to-transparent"></div>
-                        <h3 className="text-tactical-alert text-xs uppercase tracking-widest mb-2 flex items-center gap-2">
-                            <span className="w-2 h-2 bg-tactical-alert block"></span>
+                    {/* Dialog Box (Shrunk Padding and Text) */}
+                    <div className="panel-tactical w-full z-10 p-3 relative shadow-md">
+                        <div className="absolute top-0 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-tactical-alert to-transparent"></div>
+                        <h3 className="text-tactical-alert text-[10px] uppercase tracking-widest mb-1 flex items-center gap-1.5">
+                            <span className="w-1.5 h-1.5 bg-tactical-alert block"></span>
                             Transmissão Prioritária - Comando Central
                         </h3>
-                        <p className="text-slate-200 text-lg leading-relaxed mb-4 italic font-medium">
+                        <p className="text-slate-200 text-sm leading-snug mb-2 italic font-medium">
                             "{challengeData?.storyContext}"
                         </p>
                     </div>
                 </div>
 
-                {/* Right Side: Mission Details & Deploy */}
-                <div className="w-[50%] h-full flex flex-col justify-center items-end pr-8 gap-8">
+                {/* Right Side: Mission Details & Deploy (Shrunk Sizes) */}
+                <div className="w-[50%] h-full flex flex-col justify-center items-end pr-4 gap-4">
 
-                    <div className="panel-tactical w-full max-w-lg text-right relative backdrop-blur-md">
+                    <div className="panel-tactical w-full max-w-sm text-right relative backdrop-blur-md p-4">
                         {/* Tactical decoration corner */}
-                        <div className="absolute -top-2 -left-2 w-4 h-4 border-t-2 border-l-2 border-tactical-cyan"></div>
+                        <div className="absolute -top-1 -left-1 w-2 h-2 border-t-[1px] border-l-[1px] border-tactical-cyan"></div>
 
-                        <div className="mb-2 text-slate-400 font-mono text-xs tracking-widest uppercase">Diretiva de Missão</div>
-                        <h1 className="text-4xl text-white font-black uppercase mb-1">
+                        <div className="mb-1 text-slate-400 font-mono text-[10px] tracking-widest uppercase">Diretiva de Missão</div>
+                        <h1 className="text-2xl text-white font-black uppercase mb-0.5">
                             Fase 0{currentPhase}
                         </h1>
-                        <h2 className="text-2xl text-tactical-neon font-bold mb-6 truncate uppercase tracking-wide">
+                        <h2 className="text-sm text-tactical-neon font-bold mb-3 truncate uppercase tracking-wide">
                             {challengeData?.title}
                         </h2>
 
-                        <div className="flex flex-col items-end gap-2 mb-8 font-mono text-sm group">
-                            <div className="flex w-full justify-between items-center text-slate-300 border-b border-slate-800 py-2">
+                        <div className="flex flex-col items-end gap-1 mb-4 font-mono text-[11px] group">
+                            <div className="flex w-full justify-between items-center text-slate-300 border-b border-slate-800 py-1">
                                 <span>Objetivo Atual:</span>
                                 <strong className="text-tactical-cyan">{challengeData?.id} de 31</strong>
                             </div>
-                            <div className="flex w-full justify-between items-center text-slate-300 border-b border-slate-800 py-2">
+                            <div className="flex w-full justify-between items-center text-slate-300 border-b border-slate-800 py-1">
                                 <span>Tática Exigida:</span>
-                                <strong className="text-tactical-alert">Múltipla Escolha Rápida</strong>
+                                <strong className="text-tactical-alert text-[10px]">Múltipla Escolha Rápida</strong>
                             </div>
-                            <div className="flex w-full justify-between items-center text-slate-300 border-b border-slate-800 py-2">
+                            <div className="flex w-full justify-between items-center text-slate-300 border-b border-slate-800 py-1">
                                 <span>Recompensa Máxima M.Q.:</span>
-                                <strong className="text-white flex items-center gap-1">200<span className="text-tactical-neon text-[10px]">♦</span></strong>
+                                <strong className="text-white flex items-center gap-1">200<span className="text-tactical-neon text-[8px]">♦</span></strong>
                             </div>
                         </div>
 
                         <button
-                            className="btn-tactical w-full py-5 text-xl relative group overflow-hidden shadow-2xl shadow-tactical-cyan/20"
+                            className="btn-tactical w-full py-2.5 text-sm relative group overflow-hidden shadow-lg shadow-tactical-cyan/10"
                             onClick={() => navigate('/mission')}
                         >
                             <div className="absolute inset-0 w-full h-full bg-tactical-neon/20 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-out"></div>
-                            <span className="relative z-10 flex items-center justify-center gap-3">
+                            <span className="relative z-10 flex items-center justify-center gap-2">
                                 DEPLOY MISSION
                                 {/* SVG Arrow icon */}
-                                <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                                <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                             </span>
                         </button>
                     </div>
