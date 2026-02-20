@@ -3,7 +3,7 @@ import { supabase } from '../lib/supabaseClient';
 import challengesData from '../data/challenges';
 
 // Rank thresholds based on challenge progress (1-31)
-const getRank = (challengeId) => {
+export const getRank = (challengeId) => {
     if (challengeId === 1) return "Cadete";
     if (challengeId <= 11) return "Aspirante";
     if (challengeId <= 16) return "2º Tenente";
@@ -40,10 +40,10 @@ export const useGameStore = create((set, get) => ({
     // Actions
     login: async (name, selectedAvatar) => {
         set({ isLoading: true });
-        const trimmedName = name.trim();
+        const trimmedName = name.trim().toUpperCase();
 
         try {
-            // 1. Check if profile exists
+            // 1. Check if profile exists (using uppercase to avoid duplicates)
             const { data, error } = await supabase
                 .from('profiles')
                 .select('*')
