@@ -4,16 +4,20 @@ import { useNavigate } from 'react-router-dom';
 import { ChevronRight } from 'lucide-react';
 
 export default function LoginView() {
-    const login = useGameStore((state) => state.login);
+    const { login, isLoading } = useGameStore();
     const navigate = useNavigate();
 
     const [name, setName] = useState('');
     const [avatar, setAvatar] = useState('avatar_tim');
 
-    const handleStart = () => {
+    const handleStart = async () => {
         if (name.trim()) {
-            login(name, avatar);
-            navigate('/hub');
+            const result = await login(name, avatar);
+            if (result?.success) {
+                navigate('/hub');
+            } else {
+                alert("Erro ao conectar com a Central de Comando (Supabase). Verifique sua internet.");
+            }
         }
     };
 
@@ -86,11 +90,20 @@ export default function LoginView() {
                     <button
                         className="btn-tactical !p-0 w-12 h-11 flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed shrink-0"
                         onClick={handleStart}
-                        disabled={!name.trim()}
+                        disabled={!name.trim() || isLoading}
                     >
-                        <ChevronRight size={24} />
+                        {isLoading ? (
+                            <div className="w-5 h-5 border-2 border-tactical-cyan/40 border-t-tactical-cyan rounded-full animate-spin"></div>
+                        ) : (
+                            <ChevronRight size={24} />
+                        )}
                     </button>
                 </div>
+                {isLoading && (
+                    <p className="text-[10px] text-tactical-cyan font-mono animate-pulse -mt-4 uppercase tracking-[0.3em]">
+                        Sincronizando Perfil...
+                    </p>
+                )}
             </div>
 
             {/* Decorative corner brackets (Page) */}
