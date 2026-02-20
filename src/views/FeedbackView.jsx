@@ -10,20 +10,20 @@ export default function FeedbackView() {
         success: false, earned: 0, timeSpent: 0, hints: 0, completedId: currentChallengeId, completedPhase: currentPhase
     };
 
-    const handleNext = () => {
+    const handleNext = async () => {
         if (success) {
-            if (currentChallengeId <= totalChallenges) {
-                // If it's the last one, maybe go to hub
-                if (completedId === totalChallenges) {
-                    navigate('/hub');
-                } else {
-                    navigate('/mission'); // Already advanced in GameplayView
-                }
+            // Only advance if the player is currently on this mission (prevents double advancing if they go back/refresh)
+            if (completedId === currentChallengeId) {
+                await advanceChallenge();
+            }
+
+            if (completedId < totalChallenges) {
+                navigate('/mission');
             } else {
                 navigate('/hub');
             }
         } else {
-            // Retry the same one (still the current ID)
+            // Retry the same mission
             navigate('/mission');
         }
     };

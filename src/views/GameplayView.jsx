@@ -5,7 +5,7 @@ import { Calculator } from 'lucide-react';
 import TacticalCalculator from '../components/TacticalCalculator';
 
 export default function GameplayView() {
-    const { challengeData, currentPhase, addDiamonds, avatar, advanceChallenge } = useGameStore();
+    const { challengeData, currentPhase, addDiamonds, avatar } = useGameStore();
     const navigate = useNavigate();
 
     const [timeElapsed, setTimeElapsed] = useState(0);
@@ -51,10 +51,7 @@ export default function GameplayView() {
             earned = Math.max(50, baseReward); // Enforce minimum reward
             addDiamonds(earned);
 
-            // Advance state immediately
-            advanceChallenge();
-
-            // Navigate to feedback passing props
+            // Navigate to feedback passing props (Don't advance yet)
             navigate('/result', {
                 state: {
                     success: true,
@@ -144,17 +141,15 @@ export default function GameplayView() {
             {/* Middle Content - Wide Landscape Split (Shrunk Gap) */}
             <div className="flex-1 flex px-8 z-10 h-full max-h-[60%] gap-4">
 
-                {/* Left Side: General Avatar (Mentor) */}
-                <div className="w-1/4 h-full hidden md:flex flex-col justify-start pt-[20px]">
-                    <div className="relative w-full h-[80%] border-b-[1px] border-r-[1px] border-slate-800 rounded-br-xl flex items-end overflow-hidden">
+                {/* Left Side: General Avatar (Mentor) - Reduced size and Filter removed */}
+                <div className="w-[21%] h-full hidden md:flex flex-col justify-start pt-[20px]">
+                    <div className="relative w-full h-[68%] border-b-[1px] border-r-[1px] border-slate-800 rounded-br-xl flex items-end overflow-hidden">
                         <span className="absolute top-1 left-1 text-[8px] text-slate-500 font-mono uppercase tracking-tighter">Comando Central: Ativo</span>
                         {/* Avatar Image Background */}
                         <div
                             className="w-full h-full bg-cover bg-top"
                             style={{ backgroundImage: "url('avatar_general.png')" }}
                         ></div>
-                        {/* Gradient to blend avatar - Matching Login Style */}
-                        <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent"></div>
                     </div>
                 </div>
 
