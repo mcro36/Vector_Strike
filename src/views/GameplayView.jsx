@@ -8,19 +8,18 @@ export default function GameplayView() {
     const { challengeData, currentPhase, addDiamonds, avatar } = useGameStore();
     const navigate = useNavigate();
 
-    const [timeLeft, setTimeLeft] = useState(60);
+    const [timeElapsed, setTimeElapsed] = useState(0);
     const [hintLevel, setHintLevel] = useState(0); // 0=none, 1=text, 2=formula
     const [diamondsSpent, setDiamondsSpent] = useState(0);
     const [showCalc, setShowCalc] = useState(false);
 
-    // Timer effect
+    // Timer effect - Count up
     useEffect(() => {
-        if (timeLeft <= 0) return;
         const timerId = setInterval(() => {
-            setTimeLeft(prev => prev - 1);
+            setTimeElapsed(prev => prev + 1);
         }, 1000);
         return () => clearInterval(timerId);
-    }, [timeLeft]);
+    }, []);
 
     const handleIntelClick = () => {
         if (hintLevel === 0) {
@@ -39,8 +38,8 @@ export default function GameplayView() {
         if (isCorrect) {
             // Base reward 200
             let baseReward = 200;
-            // Time penalty
-            if (timeLeft <= 0) { // meaning > 60s since default is 60s
+            // Time penalty if > 60s
+            if (timeElapsed >= 60) {
                 baseReward -= 50;
             }
             // Hint penalties
@@ -50,10 +49,10 @@ export default function GameplayView() {
             addDiamonds(earned);
 
             // Navigate to feedback passing props
-            navigate('/result', { state: { success: true, earned, timeSpent: 60 - timeLeft, hints: hintLevel } });
+            navigate('/result', { state: { success: true, earned, timeSpent: timeElapsed, hints: hintLevel } });
         } else {
             // Wrong answer
-            navigate('/result', { state: { success: false, earned: 0, timeSpent: 60 - timeLeft, hints: hintLevel } });
+            navigate('/result', { state: { success: false, earned: 0, timeSpent: timeElapsed, hints: hintLevel } });
         }
     };
 
@@ -106,12 +105,12 @@ export default function GameplayView() {
                 </div>
 
                 <div className="flex gap-2">
-                    {/* Timer Panel (Shrunk) */}
-                    <div className={`panel-tactical !p-2 flex items-center gap-3 ${timeLeft <= 10 ? 'border-tactical-alert/50 shadow-[0_0_10px_rgba(249,115,22,0.4)]' : 'border-tactical-neon/30'}`}>
+                    {/* Timer Panel (Count Up) */}
+                    <div className={`panel-tactical !p-2 flex items-center gap-3 ${timeElapsed >= 120 ? 'border-orange-500 shadow-[0_0_10px_rgba(249,115,22,0.4)]' : 'border-tactical-neon/30'}`}>
                         <div className="flex flex-col text-right">
-                            <span className="text-[8px] uppercase text-tactical-neon tracking-widest leading-none mb-0.5">Tempo Limite</span>
-                            <span className={`text-xl font-mono font-black leading-none ${timeLeft <= 10 ? 'text-tactical-alert animate-pulse' : 'text-slate-200'}`}>
-                                {timeLeft > 0 ? `00:${timeLeft.toString().padStart(2, '0')}` : '00:00'}
+                            <span className="text-[8px] uppercase text-tactical-neon tracking-widest leading-none mb-0.5">Tempo</span>
+                            <span className={`text-xl font-mono font-black leading-none ${timeElapsed >= 120 ? 'text-orange-500' : 'text-slate-200'}`}>
+                                {Math.floor(timeElapsed / 60).toString().padStart(2, '0')}:{(timeElapsed % 60).toString().padStart(2, '0')}
                             </span>
                         </div>
                     </div>
@@ -122,7 +121,7 @@ export default function GameplayView() {
             <div className="flex-1 flex px-8 z-10 h-full max-h-[60%] gap-4">
 
                 {/* Left Side: Real Avatar Image */}
-                <div className="w-1/4 h-full hidden md:flex flex-col justify-end pt-4 opacity-90">
+                <div className="w-1/4 h-full hidden md:flex flex-col justify-start pt-[20px]">
                     <div className="relative w-full h-[80%] border-b-[1px] border-r-[1px] border-slate-800 rounded-br-xl flex items-end overflow-hidden">
                         <span className="absolute top-1 left-1 text-[8px] text-slate-500 font-mono uppercase tracking-tighter">Sensors Alpha: {avatar}</span>
                         {/* Avatar Image Background */}
@@ -130,8 +129,8 @@ export default function GameplayView() {
                             className="w-full h-full bg-cover bg-top"
                             style={{ backgroundImage: `url('${avatar}.png')` }}
                         ></div>
-                        {/* Gradient to blend avatar bottom */}
-                        <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent h-1/2 bottom-0"></div>
+                        {/* Gradient to blend avatar - Matching Login Style */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent"></div>
                     </div>
                 </div>
 

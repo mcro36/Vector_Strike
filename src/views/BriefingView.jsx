@@ -1,5 +1,6 @@
 import { useGameStore } from '../store/gameStore';
 import { useNavigate } from 'react-router-dom';
+import { LogOut } from 'lucide-react';
 
 export default function BriefingView() {
     const { playerName, currentRank, currentPhase, diamonds, challengeData, resetGame } = useGameStore();
@@ -25,16 +26,17 @@ export default function BriefingView() {
                     </div>
                 </div>
 
-                <div className="flex flex-col items-end gap-0.5">
+                <div className="flex gap-3 items-center">
                     <div className="font-mono text-tactical-neon flex items-center gap-1.5">
                         <span className="text-[8px] uppercase text-slate-400">Total Diamonds:</span>
                         <span className="text-sm font-bold tracking-widest">{diamonds}♦</span>
                     </div>
                     <button
                         onClick={handleLogout}
-                        className="text-[8px] uppercase text-slate-500 hover:text-tactical-alert transition-colors tracking-wider cursor-pointer leading-none"
+                        className="p-1.5 rounded bg-slate-800/50 border border-slate-700 text-slate-400 hover:text-tactical-alert hover:border-tactical-alert transition-all cursor-pointer flex items-center justify-center"
+                        title="Trocar de Conta"
                     >
-                        [Trocar de Conta]
+                        <LogOut size={14} />
                     </button>
                 </div>
             </div>

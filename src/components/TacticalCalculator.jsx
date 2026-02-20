@@ -38,7 +38,6 @@ export default function TacticalCalculator({ onClose }) {
 
                 {/* Display */}
                 <div className="bg-black/50 border border-slate-800 p-3 mb-4 rounded font-mono text-right overflow-hidden">
-                    <div className="text-[10px] text-slate-500 uppercase h-3">COMMS_LINK: ACTIVE</div>
                     <div className="text-xl text-tactical-neon font-bold truncate">{display}</div>
                 </div>
 
