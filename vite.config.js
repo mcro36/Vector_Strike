@@ -4,7 +4,7 @@ import { VitePWA } from 'vite-plugin-pwa'
 
 // https://vite.dev/config/
 export default defineConfig({
-  base: '/',
+  base: '/Vector_Strike/',
   plugins: [
     react(),
     VitePWA({
@@ -12,6 +12,9 @@ export default defineConfig({
       injectRegister: 'script',
       includeAssets: ['favicon.ico', 'vite.svg', '*.png'],
       manifest: {
+        id: '/Vector_Strike/',
+        start_url: '/Vector_Strike/',
+        scope: '/Vector_Strike/',
         name: 'Vector Strike',
         short_name: 'Vector Strike',
         description: 'Um simulador tático militar focado na resolução de problemas de física.',
@@ -31,6 +34,9 @@ export default defineConfig({
             type: 'image/svg+xml'
           }
         ]
+      },
+      workbox: {
+        globPatterns: ['**/*.{js,css,html,ico,png,svg}']
       },
       devOptions: {
         enabled: true
