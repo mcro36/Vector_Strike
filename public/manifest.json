@@ -1,0 +1,17 @@
+{
+    "name": "Vector Strike",
+    "short_name": "Vector Strike",
+    "start_url": ".",
+    "display": "fullscreen",
+    "background_color": "#0f172a",
+    "theme_color": "#06b6d4",
+    "orientation": "landscape",
+    "icons": [
+        {
+            "src": "/vite.svg",
+            "sizes": "192x192 512x512",
+            "type": "image/svg+xml",
+            "purpose": "any"
+        }
+    ]
+}
