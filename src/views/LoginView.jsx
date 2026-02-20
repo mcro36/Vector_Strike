@@ -27,7 +27,7 @@ export default function LoginView() {
                 <div className="text-center w-full whitespace-nowrap">
                     {/* REDUCED FONT SIZE BY ~20% (text-4xl/5xl to text-3xl/4xl) */}
                     <h1 className="text-3xl md:text-4xl font-black text-white tracking-[0.2em] mb-1 truncate">
-                        COMBAT PHYSICS <span className="text-tactical-cyan">SIMULATOR</span>
+                        VECTOR <span className="text-tactical-cyan">STRIKE</span>
                     </h1>
                 </div>
 
@@ -70,8 +70,8 @@ export default function LoginView() {
                     </button>
                 </div>
 
-                <div className="flex flex-col gap-2 w-full max-w-sm mt-4">
-                    {/* REDUCED INPUT BASE SIZE BY ~15% (p-4/text-xl -> p-3/text-lg) */}
+                <div className="flex flex-col gap-2 w-full max-w-[16rem] mt-4">
+                    {/* REDUCED INPUT BASE SIZE BY ~15% (p-4/text-xl -> p-3/text-lg), And width by 30% */}
                     <input
                         type="text"
                         value={name}
@@ -84,7 +84,7 @@ export default function LoginView() {
 
                 {/* RENOMEOU PARA ALISTAR-SE (Item 3) */}
                 <button
-                    className="btn-tactical text-xl w-full max-w-sm disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="btn-tactical text-xl w-full max-w-[16rem] disabled:opacity-50 disabled:cursor-not-allowed"
                     onClick={handleStart}
                     disabled={!name.trim()}
                 >
