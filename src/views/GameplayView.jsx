@@ -63,33 +63,33 @@ export default function GameplayView() {
                 backgroundImage: 'radial-gradient(circle at center, transparent 0%, rgba(15, 23, 42, 1) 100%)'
             }}></div>
 
-            {/* Top HUD */}
-            <div className="w-full flex justify-between items-center px-8 py-4 z-20">
-                <div className="flex gap-4 items-center">
-                    {/* Intel Button */}
+            {/* Top HUD (Reduced height and padding) */}
+            <div className="w-full flex justify-between items-center px-4 py-2 z-20">
+                <div className="flex gap-2 items-center">
+                    {/* Intel Button (Shrunk) */}
                     <button
                         onClick={handleIntelClick}
                         disabled={hintLevel >= 2}
-                        className={`panel-tactical !p-2 !py-2 flex items-center gap-3 transition-all ${hintLevel >= 2 ? 'opacity-50 cursor-not-allowed border-slate-700' : 'hover:border-tactical-cyan cursor-pointer'}`}
+                        className={`panel-tactical !p-1.5 !py-1.5 flex items-center gap-2 transition-all ${hintLevel >= 2 ? 'opacity-50 cursor-not-allowed border-slate-700' : 'hover:border-tactical-cyan cursor-pointer'}`}
                     >
-                        <div className="w-8 h-8 rounded-full bg-blue-900 border border-tactical-cyan flex items-center justify-center">
-                            <span className="text-tactical-cyan font-bold block pb-1">?</span>
+                        <div className="w-6 h-6 rounded-full bg-blue-900 border border-tactical-cyan flex items-center justify-center">
+                            <span className="text-tactical-cyan font-bold block pb-0.5 text-xs">?</span>
                         </div>
-                        <div className="flex flex-col items-start pr-4">
-                            <span className="text-xs text-tactical-cyan uppercase tracking-widest font-bold">Solicitar Intel</span>
-                            <span className="text-[10px] text-slate-400">
+                        <div className="flex flex-col items-start pr-2">
+                            <span className="text-[10px] text-tactical-cyan uppercase tracking-widest font-bold">Solicitar Intel</span>
+                            <span className="text-[8px] text-slate-400">
                                 {hintLevel === 0 ? '-30♦ (Texto)' : hintLevel === 1 ? '-70♦ (Blueprint)' : 'Max Intel'}
                             </span>
                         </div>
                     </button>
                 </div>
 
-                <div className="flex gap-4">
-                    {/* Timer Panel */}
-                    <div className={`panel-tactical !p-3 flex items-center gap-4 ${timeLeft <= 10 ? 'border-tactical-alert/50 shadow-[0_0_15px_rgba(249,115,22,0.5)]' : 'border-tactical-neon/30'}`}>
+                <div className="flex gap-2">
+                    {/* Timer Panel (Shrunk) */}
+                    <div className={`panel-tactical !p-2 flex items-center gap-3 ${timeLeft <= 10 ? 'border-tactical-alert/50 shadow-[0_0_10px_rgba(249,115,22,0.4)]' : 'border-tactical-neon/30'}`}>
                         <div className="flex flex-col text-right">
-                            <span className="text-[10px] uppercase text-tactical-neon tracking-widest">Tempo Limite</span>
-                            <span className={`text-3xl font-mono font-black ${timeLeft <= 10 ? 'text-tactical-alert animate-pulse' : 'text-slate-200'}`}>
+                            <span className="text-[8px] uppercase text-tactical-neon tracking-widest leading-none mb-0.5">Tempo Limite</span>
+                            <span className={`text-xl font-mono font-black leading-none ${timeLeft <= 10 ? 'text-tactical-alert animate-pulse' : 'text-slate-200'}`}>
                                 {timeLeft > 0 ? `00:${timeLeft.toString().padStart(2, '0')}` : '00:00'}
                             </span>
                         </div>
@@ -97,40 +97,46 @@ export default function GameplayView() {
                 </div>
             </div>
 
-            {/* Middle Content - Wide Landscape Split */}
-            <div className="flex-1 flex px-12 z-10 h-full max-h-[60%]">
+            {/* Middle Content - Wide Landscape Split (Shrunk Gap) */}
+            <div className="flex-1 flex px-8 z-10 h-full max-h-[60%] gap-4">
 
-                {/* Left Side: Avatar Reaction Placeholder */}
-                <div className="w-1/4 h-full hidden md:flex flex-col justify-end pt-8 pr-8 opacity-80">
-                    <div className="relative w-full aspect-[2/3] border-b-2 border-r-2 border-slate-800 rounded-br-2xl flex items-end">
-                        <span className="absolute top-2 left-2 text-[10px] text-slate-500 font-mono">Sensors Alpha</span>
-                        <div className="w-full text-center pb-4 text-xs font-mono text-slate-600">[{avatar.toUpperCase()}_POSE]</div>
+                {/* Left Side: Real Avatar Image */}
+                <div className="w-1/4 h-full hidden md:flex flex-col justify-end pt-4 opacity-90">
+                    <div className="relative w-full h-[80%] border-b-[1px] border-r-[1px] border-slate-800 rounded-br-xl flex items-end overflow-hidden">
+                        <span className="absolute top-1 left-1 text-[8px] text-slate-500 font-mono uppercase tracking-tighter">Sensors Alpha: {avatar}</span>
+                        {/* Avatar Image Background */}
+                        <div
+                            className="w-full h-full bg-cover bg-top"
+                            style={{ backgroundImage: `url('${avatar}.png')` }}
+                        ></div>
+                        {/* Gradient to blend avatar bottom */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent h-1/2 bottom-0"></div>
                     </div>
                 </div>
 
                 {/* Right Side: Problem Dashboard */}
                 <div className="w-full md:w-3/4 h-full flex flex-col justify-center">
 
-                    {/* Main Question Panel */}
-                    <div className="panel-tactical w-full !border-l-4 !border-l-tactical-cyan p-8 mb-6 relative">
-                        <div className="absolute top-0 right-0 w-16 h-16 bg-gradient-to-bl from-slate-800 to-transparent"></div>
-                        <h2 className="text-2xl font-bold text-white leading-relaxed z-10 relative">
+                    {/* Main Question Panel (Shrunk Text and Padding) */}
+                    <div className="panel-tactical w-full !border-l-2 !border-l-tactical-cyan p-4 mb-3 relative">
+                        <div className="absolute top-0 right-0 w-8 h-8 bg-gradient-to-bl from-slate-800 to-transparent"></div>
+                        <h2 className="text-lg font-bold text-white leading-normal z-10 relative">
                             {challengeData.question}
                         </h2>
                     </div>
 
-                    {/* Hint Render Area */}
-                    <div className="min-h-[100px] w-full mb-4">
+                    {/* Hint Render Area (Shrunk) */}
+                    <div className="min-h-[60px] w-full mb-2">
                         {hintLevel > 0 && (
-                            <div className={`p-4 border-l-2 bg-slate-800/80 animate-fade-in
+                            <div className={`p-2 border-l-[1.5px] bg-slate-800/80 animate-fade-in
                 ${hintLevel === 1 ? 'border-blue-500' : 'border-tactical-alert'}
               `}>
-                                <p className="text-sm font-mono text-slate-300 mb-2">
+                                <p className="text-xs font-mono text-slate-300 mb-1">
                                     <strong className="text-blue-400">INTEL RCV:</strong> {challengeData.hint1}
                                 </p>
                                 {hintLevel === 2 && (
-                                    <div className="mt-4 p-4 bg-tactical-dark border border-tactical-cyan/30 rounded inline-block font-mono text-tactical-neon whitespace-pre-line shadow-[inset_0_0_20px_rgba(6,182,212,0.1)] relative overflow-hidden">
-                                        <div className="absolute top-0 left-0 w-full h-[1px] bg-tactical-cyan opacity-50 shadow-[0_0_10px_#06b6d4]"></div>
+                                    <div className="mt-2 p-2 bg-tactical-dark border border-tactical-cyan/30 rounded inline-block font-mono text-tactical-neon text-[10px] whitespace-pre-line shadow-[inset_0_0_10px_rgba(6,182,212,0.1)] relative overflow-hidden">
+                                        <div className="absolute top-0 left-0 w-full h-[0.5px] bg-tactical-cyan opacity-50"></div>
                                         {challengeData.hint2}
                                     </div>
                                 )}
@@ -140,17 +146,17 @@ export default function GameplayView() {
                 </div>
             </div>
 
-            {/* Bottom Tactics (Options) */}
-            <div className="w-full h-auto p-8 flex justify-center gap-6 z-20 mt-auto bg-gradient-to-t from-slate-950 to-transparent">
+            {/* Bottom Tactics (Options) (Shrunk Height) */}
+            <div className="w-full h-auto p-4 flex justify-center gap-3 z-20 mt-auto bg-gradient-to-t from-slate-950 to-transparent">
                 {challengeData.options.map((opt, idx) => (
                     <button
                         key={idx}
                         onClick={() => handleAnswer(idx)}
-                        className="flex-1 max-w-[30%] btn-tactical !py-6 group"
+                        className="flex-1 max-w-[30%] btn-tactical !py-3 !px-4 group"
                     >
-                        <div className="flex gap-4 items-center pl-4">
-                            <span className="text-slate-500 font-mono text-sm opacity-50 group-hover:text-tactical-cyan transition">0{idx + 1}</span>
-                            <span className="text-xl w-full text-left font-bold text-white group-hover:text-tactical-dark group-active:text-tactical-dark transition">{opt}</span>
+                        <div className="flex gap-2 items-center">
+                            <span className="text-slate-500 font-mono text-xs opacity-50 group-hover:text-tactical-cyan transition">0{idx + 1}</span>
+                            <span className="text-base w-full text-left font-bold text-white group-hover:text-tactical-dark group-active:text-tactical-dark transition">{opt}</span>
                         </div>
                     </button>
                 ))}
