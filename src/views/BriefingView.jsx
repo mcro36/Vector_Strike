@@ -40,79 +40,72 @@ export default function BriefingView() {
                 </div>
             </div>
 
-            {/* Main Content Area (Shrunk Margins) */}
-            <div className="w-full h-full pt-10 flex items-center justify-between z-10 gap-4">
+            {/* Main Content Area: Now using relative positioning to place the General at the top-left */}
+            <div className="w-full h-full pt-10 px-4 flex justify-end items-center z-10 relative">
 
-                {/* Left Side: General Mentor Avatar and Dialogue */}
-                <div className="w-[45%] h-full flex flex-col justify-end pb-4 relative">
-
-                    {/* General Image Box Placeholder (Shrunk 50%) */}
-                    <div className="relative w-40 h-[14rem] self-center -mb-4 z-0">
-                        {/* General BG glow */}
-                        <div className="absolute inset-0 bg-tactical-alert/20 blur-xl rounded-full"></div>
-                        {/* Image frame */}
-                        <div
-                            className="w-full h-full bg-slate-800 border-[1px] border-slate-700/50 rounded-md flex flex-col justify-end relative shadow-xl bg-cover bg-top"
-                            style={{ backgroundImage: "url('avatar_general.png')" }}
-                        >
-                            <div className="absolute top-2 left-2 font-mono text-[8px] opacity-70 uppercase text-white bg-black/50 px-1 py-0.5 rounded backdrop-blur-sm">General Mentor</div>
-                            {/* Gradients to blend character feet */}
-                            <div className="h-1/3 w-full bg-gradient-to-t from-slate-950 via-slate-900/80 to-transparent absolute bottom-0"></div>
-                        </div>
-                    </div>
-
-                    {/* Dialog Box (Shrunk Padding and Text) */}
-                    <div className="panel-tactical w-full z-10 p-3 relative shadow-md">
-                        <div className="absolute top-0 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-tactical-alert to-transparent"></div>
-                        <h3 className="text-tactical-alert text-[10px] uppercase tracking-widest mb-1 flex items-center gap-1.5">
-                            <span className="w-1.5 h-1.5 bg-tactical-alert block"></span>
-                            Transmissão Prioritária - Comando Central
-                        </h3>
-                        <p className="text-slate-200 text-sm leading-snug mb-2 italic font-medium">
-                            "{challengeData?.storyContext}"
-                        </p>
+                {/* Floating General Mentor Avatar (Top-Left) */}
+                <div className="absolute top-12 left-6 w-32 h-[11rem] z-0">
+                    <div className="absolute inset-0 bg-tactical-alert/10 blur-xl rounded-full"></div>
+                    <div
+                        className="w-full h-full bg-slate-800 border-[1px] border-slate-700/50 rounded-md flex flex-col justify-end relative shadow-lg bg-cover bg-top"
+                        style={{ backgroundImage: "url('avatar_general.png')" }}
+                    >
+                        <div className="absolute top-1.5 left-1.5 font-mono text-[7px] opacity-70 uppercase text-white bg-black/50 px-1 py-0.5 rounded backdrop-blur-sm">Comando Central</div>
+                        <div className="h-1/4 w-full bg-gradient-to-t from-slate-950 via-slate-900/60 to-transparent absolute bottom-0"></div>
                     </div>
                 </div>
 
-                {/* Right Side: Mission Details & Deploy (Shrunk Sizes) */}
-                <div className="w-[50%] h-full flex flex-col justify-center items-end pr-4 gap-4">
+                {/* Right Column: Transmission & Mission (Stacked) */}
+                <div className="w-full max-w-sm flex flex-col gap-3">
 
-                    <div className="panel-tactical w-full max-w-sm text-right relative backdrop-blur-md p-4">
+                    {/* Dialog Box: Now at the top of the right column */}
+                    <div className="panel-tactical w-full p-3 relative shadow-md">
+                        <div className="absolute top-0 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-tactical-alert to-transparent"></div>
+                        <h3 className="text-tactical-alert text-[9px] uppercase tracking-widest mb-1 flex items-center gap-1.5">
+                            <span className="w-1.5 h-1.5 bg-tactical-alert block animate-pulse"></span>
+                            Transmissão de Comando
+                        </h3>
+                        <p className="text-slate-300 text-[11px] leading-tight italic font-medium">
+                            "{challengeData?.storyContext}"
+                        </p>
+                    </div>
+
+                    {/* Mission Details & Deploy: Below transmission */}
+                    <div className="panel-tactical w-full text-right relative backdrop-blur-md p-4">
                         {/* Tactical decoration corner */}
                         <div className="absolute -top-1 -left-1 w-2 h-2 border-t-[1px] border-l-[1px] border-tactical-cyan"></div>
 
-                        <div className="mb-1 text-slate-400 font-mono text-[10px] tracking-widest uppercase">Diretiva de Missão</div>
+                        <div className="mb-0.5 text-slate-400 font-mono text-[9px] tracking-widest uppercase">Operação de Campo</div>
                         <h1 className="text-2xl text-white font-black uppercase mb-0.5">
                             Fase 0{currentPhase}
                         </h1>
-                        <h2 className="text-sm text-tactical-neon font-bold mb-3 truncate uppercase tracking-wide">
+                        <h2 className="text-[11px] text-tactical-neon font-bold mb-2 truncate uppercase tracking-widest">
                             {challengeData?.title}
                         </h2>
 
-                        <div className="flex flex-col items-end gap-1 mb-4 font-mono text-[11px] group">
-                            <div className="flex w-full justify-between items-center text-slate-300 border-b border-slate-800 py-1">
-                                <span>Objetivo Atual:</span>
-                                <strong className="text-tactical-cyan">{challengeData?.id} de 31</strong>
+                        <div className="flex flex-col items-end gap-1 mb-3 font-mono text-[10px] group">
+                            <div className="flex w-full justify-between items-center text-slate-400 border-b border-slate-800 py-0.5">
+                                <span>Progresso:</span>
+                                <strong className="text-tactical-cyan">{challengeData?.id}/31</strong>
                             </div>
-                            <div className="flex w-full justify-between items-center text-slate-300 border-b border-slate-800 py-1">
-                                <span>Tática Exigida:</span>
-                                <strong className="text-tactical-alert text-[10px]">Múltipla Escolha Rápida</strong>
+                            <div className="flex w-full justify-between items-center text-slate-400 border-b border-slate-800 py-0.5">
+                                <span>Tipo:</span>
+                                <strong className="text-tactical-alert text-[9px]">Física Tática</strong>
                             </div>
-                            <div className="flex w-full justify-between items-center text-slate-300 border-b border-slate-800 py-1">
-                                <span>Recompensa Máxima M.Q.:</span>
-                                <strong className="text-white flex items-center gap-1">200<span className="text-tactical-neon text-[8px]">♦</span></strong>
+                            <div className="flex w-full justify-between items-center text-slate-400 border-b border-slate-800 py-0.5">
+                                <span>Premiação:</span>
+                                <strong className="text-white flex items-center gap-1">200<span className="text-tactical-neon text-[7px]">♦</span></strong>
                             </div>
                         </div>
 
                         <button
-                            className="btn-tactical w-full py-2.5 text-sm relative group overflow-hidden shadow-lg shadow-tactical-cyan/10"
+                            className="btn-tactical w-full py-2 text-xs relative group overflow-hidden shadow-lg shadow-tactical-cyan/10"
                             onClick={() => navigate('/mission')}
                         >
                             <div className="absolute inset-0 w-full h-full bg-tactical-neon/20 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-out"></div>
-                            <span className="relative z-10 flex items-center justify-center gap-2">
-                                DEPLOY MISSION
-                                {/* SVG Arrow icon */}
-                                <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                            <span className="relative z-10 flex items-center justify-center gap-1.5">
+                                INICIAR DEPLOY
+                                <svg className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                             </span>
                         </button>
                     </div>
