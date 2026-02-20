@@ -5,7 +5,7 @@ import { Calculator } from 'lucide-react';
 import TacticalCalculator from '../components/TacticalCalculator';
 
 export default function GameplayView() {
-    const { challengeData, currentPhase, addDiamonds, avatar } = useGameStore();
+    const { challengeData, currentPhase, addDiamonds, avatar, advanceChallenge } = useGameStore();
     const navigate = useNavigate();
 
     const [timeElapsed, setTimeElapsed] = useState(0);
